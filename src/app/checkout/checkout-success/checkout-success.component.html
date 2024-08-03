@@ -1,0 +1,10 @@
+<div class="container mt-5">
+    <div><i class="fa fa-check-circle fa-5x mb-3" style="color: green;"></i></div>
+    <h2>Merci. Votre commande est confirmée</h2>
+    <p class="mb-4">Votre commande n'a pas encore été expédiée.</p>
+    <button *ngIf="order" routerLink="/AllCommandes/{{order.id}}" class="btn btn-outline-success">
+        Voir votre commande
+    </button>
+    <button *ngIf="!order" routerLink="/AllCommandes" class="btn btn-outline-success">
+        Consultez vos commandes    </button>
+</div>

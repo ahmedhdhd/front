@@ -1,0 +1,19 @@
+
+  <div class="d-flex justify-content-center mt-5">
+    <div class="col-6">
+      <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+        <div class="text-center mb-4">
+          <h2 class="mb-3">{{ isEdit ? 'Modifier group' : 'Ajouter group' }}</h2>
+        </div>
+  
+        <app-text-input formControlName="name" label="group name"></app-text-input>
+  
+  
+        <div class="d-grid">
+          <button [disabled]="groupForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">{{ isEdit ? 'Modifier' : 'Ajouter' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br><br><br>
+  

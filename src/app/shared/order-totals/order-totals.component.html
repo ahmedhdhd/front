@@ -1,0 +1,20 @@
+<div class="bg-light px-4 py-3 text-uppercase fw-bold">
+    Résumé du panier</div>
+
+<div class="p-4">
+    <p class="fst-italic mb-4">Les frais de livraison seront calculés en fonction des choix effectués lors de la commande</p>
+    <ul class="list-unstyled mb-4" *ngIf="(basketService.basketTotalSource$ | async) as totals">
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Sous-total de la commande</strong>
+            <strong>{{totals.subtotal }} TND</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Frais de Livraison</strong>
+            <strong>{{totals.shipping }} TND</strong>
+        </li>
+        <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Total</strong>
+            <strong>{{totals.total }} TND</strong>
+        </li>
+    </ul>
+</div>

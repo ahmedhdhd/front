@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-12 col-md-8 col-lg-6"> 
+    <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <div class="text-center mb-4">
+        <h2 class="mb-3">{{ isEdit ? 'Modifier Article' : 'Ajouter Article' }}</h2>
+      </div>
+
+      <app-text-input formControlName="name" label="Article"></app-text-input>
+      <app-text-input formControlName="description" label="Description"></app-text-input>
+      <app-text-input formControlName="prixHT" label="Prix HT" (input)="onPrixHTChange()"></app-text-input>    
+      <app-text-input formControlName="TVA" label="TVA %" (input)="onTVAChange()"></app-text-input>
+      <app-text-input formControlName="prixTTC" label="Prix TTC" (input)="onPrixTTCChange()"></app-text-input>
+      <app-text-input formControlName="prixBarre" label="Prix En Promo"></app-text-input>
+
+      <div class="mb-3">
+        <label for="groupId" class="form-label">Group</label>
+        <select id="groupId" class="form-select" formControlName="groupId" (change)="onGroupChange()">
+          <option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="familleId" class="form-label">Famille</label>
+        <select id="familleId" class="form-select" formControlName="familleId" (change)="onFamilleChange()">
+          <option *ngFor="let famille of filteredFamilles" [value]="famille.id">{{ famille.name }}</option>
+        </select>
+      </div>
+
+      <!-- Type Select -->
+      <div class="mb-3">
+        <label for="typeId" class="form-label">Type</label>
+        <select id="typeId" class="form-select" formControlName="typeId">
+          <option *ngFor="let type of filteredTypes" [value]="type.id">{{ type.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="productImage" class="form-label">Image</label>
+        <input type="file" id="productImage" (change)="onFileChange($event)" class="form-control">
+      </div>
+
+      <div class="d-grid">
+        <button [disabled]="productForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">{{ isEdit ? 'Modifier' : 'Ajouter' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

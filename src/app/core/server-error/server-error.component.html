@@ -1,0 +1,14 @@
+<div class="container mt-5">
+    <h4>Erreur interne du serveur - l'actualisation fera disparaître l'erreur</h4>
+    <ng-container *ngIf="error">
+        <h5 class="text-danger">Error: {{error.message}}</h5>
+        <p class="font-weight-bold">Cette erreur vient du serveur - pas d'Angular</p>
+        <p>Que faire ensuite?</p>
+        <ol>
+            <li>Vérifiez l'onglet réseau dans les outils de développement Chrome</li>
+            <li>Reproduisez la requête dans postman - si la même erreur se produit, ce n'est certainement pas angular !</li>
+        </ol>
+        <h5>Trace de la pile</h5>
+        <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
+    </ng-container>
+</div>

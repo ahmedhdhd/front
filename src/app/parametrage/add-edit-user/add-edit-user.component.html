@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-6">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="text-center mb-4">
+          <h2 class="mb-3">{{ isEdit ? 'Modifier utilisateur' : 'Ajouter Utilisateur' }}</h2>
+        </div>
+  
+        <app-text-input formControlName="fullName" label="Nom et prénom"></app-text-input>
+        <app-text-input formControlName="email" label="Email"></app-text-input>
+        <app-text-input formControlName="password" label="Mot de passe" type="password"></app-text-input>
+        <app-text-input formControlName="phoneNumber" label="Numéro de téléphone"></app-text-input>
+        <app-text-input formControlName="type" type="hidden" value=1 ></app-text-input>
+
+
+  
+        <div class="d-grid">
+          <button [disabled]="userForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">{{ isEdit ? 'Modifier' : 'Ajouter' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br><br><br>

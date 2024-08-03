@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <table class="table" style="cursor: pointer;">
+          <thead>
+            <tr>
+              <th>Numéro</th>
+              <th>Date</th>
+              <th>Client</th>
+              <th>M.F/Cin</th>
+              <th>Telephone</th>
+              <th>Address</th>
+              <th>Total</th>
+              <th>Etat</th>
+              <th>details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commande of commandes">
+              <th>{{ commande.id }}</th>
+              <td>{{ commande.date }}</td>
+              <td>{{ commande.user.fullName }}</td>
+              <td>{{ commande.mFcin }}</td>
+              <td>{{ commande.user.phoneNumber }}</td>
+              <td>{{ commande.adresse }}</td>
+              <td>{{ commande.totalTTC }}</td>
+              <td>
+                <p [ngClass]="{
+                  'colored-band-danger': commande.status === 'En cours',
+                  'colored-band-yellow': commande.status === 'Expedier',
+                  'colored-band-green': commande.status !== 'En cours' && commande.status !== 'Expedier'
+                }">
+                  {{ commande.status }}
+                </p>
+              </td>
+              <td>
+                <button class="btn btn-light " (click)="navigatell(commande.id)">
+                  <i class="fa fa-solid fa-ellipsis"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+
+
+

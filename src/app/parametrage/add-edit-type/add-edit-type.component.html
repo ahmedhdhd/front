@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-6">
+    <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+      <div class="text-center mb-4">
+        <h2 class="mb-3">{{ isEdit ? 'Modifier Type' : 'Ajouter Type' }}</h2>
+      </div>
+
+      <app-text-input formControlName="name" label="Type"></app-text-input>
+
+      <div class="form-group">
+        <label for="familleSelect">Famille</label>
+        <select id="familleSelect" formControlName="familleId" class="form-control">
+          <option *ngFor="let famille of familles" [value]="famille.id">{{ famille.name }}</option>
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button [disabled]="typeForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">{{ isEdit ? 'Modifier' : 'Ajouter' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<br><br><br><br>

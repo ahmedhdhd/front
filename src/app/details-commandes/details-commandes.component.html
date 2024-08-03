@@ -1,0 +1,137 @@
+
+
+<div class="container mt-5">
+    <button mat-raised-button color="primary" (click)="openAddItemModal()">Add Item</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 text-uppercase">Numero</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Date</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Client</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Nom/RaisonSocial</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">M.F/Cin</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Adresse</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="align-middle"><strong>{{order.id}}</strong></td>
+                <td class="align-middle"><strong>{{order.date}}/{{order.heure}}</strong></td>
+                <td class="align-middle"><strong>{{order.user.fullName}}</strong></td>
+                <td class="align-middle">
+                    <span class="font-weight-bold px-2"  > <strong> {{order.nomRaisonSocial}}</strong></span>
+                </td>
+                <td class="align-middle"><strong>{{order.mFcin}}</strong></td>
+                <td class="align-middle"><strong>{{order.adresse}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row" *ngIf="order.items && order.items.length">
+        <div class="col-8">
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 text-uppercase">Produit</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Prix Unitaire</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Prix TTC</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">TVA</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Quantité</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Total</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of order.items">
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="https://localhost:7179/api/produit/{{item.idProduit}}/image" alt="{{item.idProduit}}" class="img-fluid" style="max-height: 50px">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0">
+                                                {{item.produit.name}}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle"><strong>{{item.prixUnitaire}} TND</strong></td>
+                                <td class="align-middle"><strong>{{item.produit.prixTTC}} TND</strong></td>
+                                <td class="align-middle"><strong>{{item.produit.tva}} %</strong></td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold px-2"><strong>{{item.qte}}</strong></span>
+                                </td>
+                                <td class="align-middle"><strong>{{item.prixTotal}} TND</strong></td>
+                                <td class="align-middle">
+                                    <div>
+                                        <a class="text-danger" [routerLink]="['/edititem', item.id]">
+                                            <i class="fa fa-edit" style="font-size: 2em; cursor: pointer;"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="text-danger">
+                                            <i (click)="deleteitems(ide,item.id)" class="fa fa-trash" style="font-size: 2em; cursor: pointer;"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">RÉSUMÉ DU COMMANDE</div>
+            <div class="p-4">
+                <ul class="list-unstyled mb-1">
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Sous-total</strong>
+                        <strong>{{order.totalHT}} TND</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Frais de Livraison</strong>
+                        <strong>{{order.fraisLivraison}} TND</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Total</strong>
+                        <strong>{{order.totalTTC}} TND</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+

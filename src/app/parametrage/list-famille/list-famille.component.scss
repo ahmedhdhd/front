@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    text-align: center;
+    margin: 1.5rem 0; /* Adjust as needed */
+  }
+  
+  .table-responsive {
+    overflow-x: hidden;
+  }
+  
+  .row.mb-4 {
+    margin-bottom: 1.5rem; /* Adjust as needed */
+  }
+  
+  .table thead th {
+    background-color: #f8f9fa;
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Ensures the header is above other content */
+  }
+  
+  .table {
+    width: 100%; /* Ensures the table takes full width of the container */
+  }
+  

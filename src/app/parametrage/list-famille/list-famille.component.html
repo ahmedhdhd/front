@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 class="title">Liste des Familles</h2>
+  <div class="table-responsive">
+    <div class="row mb-4">
+      <div class="col">
+        <input type="text" [(ngModel)]="search" (ngModelChange)="onSearchChanges()" class="form-control" placeholder="Rechercher" />
+      </div>
+      <div class="col text-end">
+        <button routerLink="/AddFamille" class="btn btn-outline-primary mx-2">Ajouter Famille</button>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead class="text-uppercase">
+        <tr>
+          <th><div class="py-2">#</div></th>
+          <th><div class="py-2">Nom de la famille</div></th>
+          <th><div class="py-2">Nom de la group</div></th>
+          <th><div class="py-2"></div></th>
+          <th><div class="py-2"></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredFamilles">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.group?.name}}</td>
+          <td class="align-middle">
+            <a class="text-danger" routerLink="/EditFamille/{{item.id}}">
+              <i class="fa fa-edit" style="font-size: 2em; cursor: pointer;"></i>
+            </a>
+          </td>
+          <td>
+            <a class="text-danger" (click)="deleteFamille(item.id)">
+              <i class="fa fa-trash" style="font-size: 2em; cursor: pointer;"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

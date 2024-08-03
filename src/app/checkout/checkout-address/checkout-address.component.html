@@ -1,0 +1,40 @@
+<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>Adresse de Livraison</h4>
+        <button class="btn btn-outline-success mb-3 mt-2" 
+            (click)="saveUserAddress()"
+            [disabled]="!checkoutForm.get('addressForm')?.valid || 
+                !checkoutForm.get('addressForm')?.dirty"
+        >
+        Enregistrer comme adresse par défaut     
+    7   </button>
+    </div>
+    <div class="row" formGroupName="addressForm">
+        <div class="form-group col-6">
+            <app-text-input [label]="'Nom Raison Social'" formControlName="NomRaisonSocial"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+            <app-text-input [label]="'MF/cin'" formControlName="MFcin"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+            <app-text-input [label]="'Adresse'" formControlName="Address"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+            <app-text-input [label]="'Code Postal'" formControlName="codePostal"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+            <app-text-input [label]="'Gouvernorat'" formControlName="Governaourat"></app-text-input>
+        </div>
+       
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-between flex-row mt-3 mb-4">
+    <button class="btn btn-outline-primary" routerLink="/basket">
+        <i class="fa fa-angle-left"></i> Retour au panier
+    </button>
+    <button [disabled]="checkoutForm?.get('addressForm')?.invalid" class="btn btn-primary" cdkStepperNext>
+        Passer à la livraison <i class="fa fa-angle-right"></i> 
+    </button>
+</div>

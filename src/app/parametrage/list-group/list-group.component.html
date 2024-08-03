@@ -1,0 +1,45 @@
+<div class="container">
+    <h2 class="title">Liste des Groupes</h2>
+    <div class="table-responsive">
+      <div class="row mb-4">
+        <div class="col">
+          <input type="text" [(ngModel)]="search" (ngModelChange)="onSearchChanges()" class="form-control" placeholder="Rechercher" />
+        </div>
+        <div class="col text-end">
+          <button routerLink="/Addgroupe" class="btn btn-outline-primary mx-2">Ajouter Groupe</button>
+        </div>
+      </div>
+  
+      <table class="table">
+        <thead class="text-uppercase">
+          <tr>
+            <th><div class="py-2">#</div></th>
+            <th><div class="py-2">Nom du groupe</div></th>
+            <th><div class="py-2"></div></th>
+            <th><div class="py-2"></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredGroups">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td class="align-middle">
+              <div>
+                <a class="text-danger">
+                  <i [routerLink]="['/Editgroupe', item.id]" class="fa fa-edit" style="font-size: 2em; cursor: pointer;"></i>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div>
+                <a class="text-danger">
+                  <i (click)="deleteGroup(item.id)" class="fa fa-trash" style="font-size: 2em; cursor: pointer;"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

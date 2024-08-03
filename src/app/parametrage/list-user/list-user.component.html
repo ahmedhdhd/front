@@ -1,0 +1,47 @@
+<div class="table-container">
+    <h2 class="text-center my-4">Liste des utilisateurs</h2>
+    <div class="table-responsive" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+      <div class="row mb-4">
+        <div class="col">
+            <input type="text" [(ngModel)]="search" (ngModelChange)="onSearchChanges()" class="form-control" placeholder="Rechercher">
+        </div>
+        <div class="col text-end">
+          <button routerLink="/AddUser" class="btn btn-outline-primary mx-2">Ajouter Utilisateur</button>
+        </div>
+      </div>
+  
+      <table class="table">
+        <thead class="text-uppercase">
+          <tr>
+            <th><div class="py-2">Nom et prénom </div></th>
+            <th><div class="py-2"></div> Email  </th>
+            <th><div class="py-2"></div> Numéro de téléphone</th>
+            <th><div class="py-2"></div></th>
+            <th><div class="py-2"></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredUsers">
+            <td>{{item.fullName}}</td>
+            <td class="align-middle">{{item.email}}</td>
+            <td class="align-middle">{{item.phoneNumber}}</td>
+            <td class="align-middle">
+              <div>
+                <a class="text-danger">
+                  <i [routerLink]="['/EditUser', item.id]" class="fa fa-edit" style="font-size: 2em; cursor: pointer;"></i>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div>
+                <a class="text-danger">
+                  <i (click)="deleteUser(item.id)" class="align-middle fa fa-trash" style="font-size: 2em; cursor: pointer;"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

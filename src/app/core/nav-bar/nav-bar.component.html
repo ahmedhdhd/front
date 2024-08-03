@@ -1,0 +1,163 @@
+<header class="d-flex flex-row align-items-center justify-content-between p-3 px-4 mb-3 bg-white border-bottom fixed-top shadow-sm">
+    <img src="/assets/images/logo.png" alt="logo" class="logo" style="max-height: 70px;" routerLink="/">
+
+    <div class="d-flex align-items-center">
+        <a href="whatsapp://send?phone=+21623484380" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-whatsapp fa-lg text-dark"></i>54 414 782
+        </a>
+        
+        <ng-container *ngIf="isUserAdmin()">
+            
+            <div class="dropdown me-5">
+                <button class="btn btn-dropdown d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-cog me-2"></i> Paramétrage
+                    <span class="dropdown-toggle-icon"></span> 
+                </button>
+                <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="dropdownMenuButton1">
+                    <li><a routerLink="/allproduct" class="dropdown-item" routerLinkActive="active">
+                        <i class="fas fa-box me-2"></i>Produit</a></li>
+                    <li><a routerLink="/AllType" class="dropdown-item" routerLinkActive="active">
+                        <i class="fa fa-solid fa-tags me-2"></i>Type</a></li>
+                    <li><a routerLink="/AllFamille" class="dropdown-item" routerLinkActive="active">
+                        <i class="fa fa-solid fa-list-alt me-2"></i>Famille</a></li>
+                        <li><a routerLink="/Allgroupe" class="dropdown-item" routerLinkActive="active">
+                            <i class="fa fa-solid fa-list-alt me-2"></i>Groupe</a></li>
+                    <li><a routerLink="/AllUser" class="dropdown-item" routerLinkActive="active">
+                        <i class="fa fa-solid fa-user me-2"></i>Utilisateurs</a></li>
+                </ul>
+            </div>
+            <div class="dropdown me-5">
+                <button class="btn btn-dropdown d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-solid fa-money me-2"></i> Ventes
+                    <span class="dropdown-toggle-icon"></span> 
+                </button>
+                <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="dropdownMenuButton1">
+                    <li><a routerLink="/AllCommandes" class="dropdown-item" routerLinkActive="active">
+                        <i class="fas fa-receipt me-2"></i>Commandes</a></li>
+                    <li><a routerLink="/AllType" class="dropdown-item" routerLinkActive="active">
+                        <i class="fas fa-file-invoice me-2"></i>Factures</a></li>
+                    <li><a routerLink="/clients" class="dropdown-item" routerLinkActive="active"> 
+                        <i class="fa fa-solid fa-user me-2"></i>Clients</a></li>
+                        <li><a routerLink="/listproductpromo" class="dropdown-item" routerLinkActive="active">
+                            <i class="fas fa-box me-2"></i>Produit en promo</a></li>
+                </ul>
+            </div>
+        </ng-container>
+
+        <a routerLink="/shop" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-shopping-bag fa-lg text-dark"></i> Boutique
+        </a>
+        <a routerLink="/basket" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-shopping-basket fa-lg text-dark"></i> Panier
+            <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">
+                {{getCount(basket.items)}}
+            </div>
+        </a>
+
+        <ng-container *ngIf="!isUserLoggedIn()">
+            <a routerLink="/account/login" class="btn btn-outline-secondary me-2">Connexion</a>
+            <a routerLink="/account/register" class="btn btn-outline-secondary me-3">Inscription</a>
+        </ng-container>
+        
+        <ng-container *ngIf="isUserLoggedIn()">
+            <div class="dropdown ms-3 me-5" style="cursor: pointer;">
+                <a class="dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong>Welcome {{currentUser?.fullName}}</strong>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li class="py-1">
+                        <a routerLink="/orders" class="dropdown-item">
+                            <i class="fa fa-history me-3"></i> Voir les commandes
+                        </a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="py-1">
+                        <a (click)="accountService.logout()" class="dropdown-item">
+                            <i class="fa fa-sign-out me-3"></i> Se déconnecter
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+</header>
+
+
+
+<!-- <header class="d-flex flex-row align-items-center justify-content-between p-3 px-4 mb-3 bg-white border-bottom fixed-top shadow-sm">
+    <img src="/assets/images/logo.png" alt="logo" class="logo" style="max-height: 70px;" routerLink="/">
+
+    <div class="d-flex align-items-center">
+        <a href="whatsapp://send?phone=+21623484380" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-whatsapp fa-lg text-dark"></i>+216 54414782
+        </a>
+        
+        
+        <div class="dropdown me-5">
+            <button class="btn btn-dropdown d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-cog me-2"></i> Paramétrage
+                <span class="dropdown-toggle-icon"></span> 
+            </button>
+            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="dropdownMenuButton1">
+                <li><a routerLink="/allproduct" class="dropdown-item" routerLinkActive="active">
+                    <i class="fas fa-box me-2"></i>Produit</a></li>
+                <li><a routerLink="/AllType" class="dropdown-item" routerLinkActive="active">
+                    <i class="fa fa-solid fa-tags me-2"></i>Type</a></li>
+                <li><a routerLink="/AllFamille" class="dropdown-item" routerLinkActive="active">
+                    <i class="fa fa-solid fa-list-alt me-2"></i>Famille</a></li>
+                <li><a routerLink="/AllUser" class="dropdown-item" routerLinkActive="active">
+                    <i class="fa fa-solid fa-user me-2"></i>Utilisateurs</a></li>
+            </ul>
+        </div>
+        <div class="dropdown me-5">
+            <button class="btn btn-dropdown d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-solid fa-money me-2"></i> Ventes
+                <span class="dropdown-toggle-icon"></span> 
+            </button>
+            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="dropdownMenuButton1">
+                <li><a routerLink="/allproduct" class="dropdown-item" routerLinkActive="active">
+                    <i class="fas fa-receipt me-2"></i>Commandes</a></li>
+                <li><a routerLink="/AllType" class="dropdown-item" routerLinkActive="active">
+                    <i class="fas fa-file-invoice me-2"></i>Factures</a></li>
+                <li><a routerLink="/clients" class="dropdown-item" routerLinkActive="active"> 
+                    <i class="fa fa-solid fa-user me-2"></i>Clients</a></li>
+            </ul>
+        </div>
+
+        <a routerLink="/shop" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-shopping-bag fa-lg text-dark"></i> Boutique
+        </a>
+        <a routerLink="/basket" class="position-relative fs-5 me-5" routerLinkActive="active">
+            <i class="fa fa-shopping-basket fa-lg text-dark"></i> Panier
+            <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">
+                {{getCount(basket.items)}}
+            </div>
+        </a>
+
+        <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+            <a routerLink="/account/login" class="btn btn-outline-secondary me-2">Connexion</a>
+            <a routerLink="/account/register" class="btn btn-outline-secondary me-3">Inscription</a>
+        </ng-container>
+        
+        <ng-container *ngIf="accountService.currentUser$ | async as user">
+            <div class="dropdown ms-3 me-5" style="cursor: pointer;">
+                <a class="dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong>Welcome {{user.fullName}}</strong>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li class="py-1">
+                        <a routerLink="/orders" class="dropdown-item">
+                            <i class="fa fa-history me-3"></i> Voir les commandes
+                        </a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="py-1">
+                        <a (click)="accountService.logout()" class="dropdown-item">
+                            <i class="fa fa-sign-out me-3"></i> Se déconnecter
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+</header> -->
